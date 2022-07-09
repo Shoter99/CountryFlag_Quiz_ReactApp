@@ -1,24 +1,78 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useMemo, useState } from 'react';
 import './App.css';
+import {country_data} from './utils/country_list'
+import AnswerBox from './components/AnswerBox';
+
 
 function App() {
+
+  function shuffle(array: number[]) {
+    let currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
+
+  const getRandomCountry = () => {
+  let randomCountry = country_data[Math.floor(Math.random() * country_data.length)];
+  return randomCountry
+}
+  let numbers : number[];
+  const [countries, setCountries] = useState<{
+    name: string[];
+    threeLetterCode: string;
+    twoLetterCode: string;
+  }[]>([getRandomCountry()])
+
+  useEffect(() => {
+    let countryList = [...countries];
+    for(let _ = 0; _ < 3; _++){
+      while(true){
+        let newCountry = getRandomCountry();
+        let isInList = countryList.filter(item => item.twoLetterCode == newCountry.twoLetterCode);
+        if(!(isInList.length > 0)){
+          countryList.push(newCountry);
+          break;
+        }
+      }
+    }
+
+    setCountries(countryList);
+
+  }, [])
+  numbers = [0,1,2,3]
+  shuffle(numbers)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex flex-col justify-center items-center">
+      <div className='p-8'></div>
+      <div>  
+        <header className="text-3xl">
+          What country is it?
+        </header>
+        <div className='p-8'></div>
+      </div>
+      <div className="border rounded text-center">
+        <img src={"https://countryflagsapi.com/png/" + (countries[0].twoLetterCode || "").toLowerCase()} alt="Country Flag" />
+      </div>
+      <div className='p-8'></div>
+      <div className='grid grid-cols-2 gap-12'>
+      {countries.length == 4 ?  numbers.map((num) => (
+        <AnswerBox key={countries[num].twoLetterCode} country={countries[num]} answer={num == 0 ? "this" : ''} />
+      )): ""}
+      
+      </div>
     </div>
   );
 }
