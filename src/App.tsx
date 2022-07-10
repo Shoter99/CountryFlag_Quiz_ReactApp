@@ -28,13 +28,13 @@ function App() {
   let randomCountry = country_data[Math.floor(Math.random() * country_data.length)];
   return randomCountry
 }
-  let numbers : number[];
+  const [numbers, setNumbers] = useState([0,1,2,3]);
   const [countries, setCountries] = useState<{
     name: string[];
     threeLetterCode: string;
     twoLetterCode: string;
   }[]>([getRandomCountry()])
-
+  const [isAnswered, setIsAnswered] = useState(false)
   useEffect(() => {
     let countryList = [...countries];
     for(let _ = 0; _ < 3; _++){
@@ -49,11 +49,10 @@ function App() {
     }
 
     setCountries(countryList);
-
+    
+    setNumbers(shuffle(numbers))
   }, [])
-  numbers = [0,1,2,3]
-  shuffle(numbers)
-
+  
   return (
     <div className="flex flex-col justify-center items-center">
       <div className='p-8'></div>
@@ -69,9 +68,13 @@ function App() {
       <div className='p-8'></div>
       <div className='grid grid-cols-2 gap-12'>
       {countries.length == 4 ?  numbers.map((num) => (
-        <AnswerBox key={countries[num].twoLetterCode} country={countries[num]} answer={num == 0 ? "this" : ''} />
+        <AnswerBox isAnswered={isAnswered} goToNext={() => setIsAnswered(!isAnswered)} key={countries[num].twoLetterCode} country={countries[num]} answer={num == 0 ? "this" : ''} />
       )): ""}
       
+      </div>
+      <div className="p-4"></div>
+      <div>
+          <button className={`border rounded p-2 hover:bg-white hover:text-black cursor-pointer ${!isAnswered && "hidden"}`} onClick={() => {window.location.reload()}}>Next</button>
       </div>
     </div>
   );
