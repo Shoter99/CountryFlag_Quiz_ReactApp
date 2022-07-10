@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/CountryFlag_Quiz_ReactApp/static/css/main.20a01a07.css",
-    "main.js": "/CountryFlag_Quiz_ReactApp/static/js/main.6845bbff.js",
+    "main.css": "/CountryFlag_Quiz_ReactApp/static/css/main.6ef02cf3.css",
+    "main.js": "/CountryFlag_Quiz_ReactApp/static/js/main.b1f20f60.js",
     "static/js/787.e5fb59dc.chunk.js": "/CountryFlag_Quiz_ReactApp/static/js/787.e5fb59dc.chunk.js",
     "index.html": "/CountryFlag_Quiz_ReactApp/index.html",
-    "main.20a01a07.css.map": "/CountryFlag_Quiz_ReactApp/static/css/main.20a01a07.css.map",
-    "main.6845bbff.js.map": "/CountryFlag_Quiz_ReactApp/static/js/main.6845bbff.js.map",
+    "main.6ef02cf3.css.map": "/CountryFlag_Quiz_ReactApp/static/css/main.6ef02cf3.css.map",
+    "main.b1f20f60.js.map": "/CountryFlag_Quiz_ReactApp/static/js/main.b1f20f60.js.map",
     "787.e5fb59dc.chunk.js.map": "/CountryFlag_Quiz_ReactApp/static/js/787.e5fb59dc.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.20a01a07.css",
-    "static/js/main.6845bbff.js"
+    "static/css/main.6ef02cf3.css",
+    "static/js/main.b1f20f60.js"
   ]
 }
