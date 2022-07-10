@@ -55,18 +55,18 @@ function App() {
   
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className='p-8'></div>
+      <div className='p-4'></div>
       <div>  
         <header className="text-3xl">
           What country is it?
         </header>
-        <div className='p-8'></div>
+        <div className='p-4'></div>
       </div>
       <div className="border rounded text-center">
         <img src={"https://countryflagsapi.com/png/" + (countries[0].twoLetterCode || "").toLowerCase()} alt="Country Flag" />
       </div>
-      <div className='p-8'></div>
-      <div className='grid grid-cols-2 gap-12'>
+      <div className='p-4'></div>
+      <div className='grid grid-cols-2 gap-6'>
       {countries.length == 4 ?  numbers.map((num) => (
         <AnswerBox isAnswered={isAnswered} goToNext={() => setIsAnswered(!isAnswered)} key={countries[num].twoLetterCode} country={countries[num]} answer={num == 0 ? "this" : ''} />
       )): ""}

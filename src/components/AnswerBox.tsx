@@ -16,12 +16,11 @@ const AnswerBox = (props : Props) => {
   const button = useId()
   
   useEffect(() => {
-    if(props.isAnswered && props.answer == "this"){
+    if(props.isAnswered){
       let btn = document.getElementById(button)?.classList
       btn?.remove("hover:text-black", "hover:bg-white", "cursor-pointer");
       if(props.answer == "this"){
         btn?.add("bg-green-500")
-        props.goToNext()
       }
     }
   }, [props.isAnswered])
@@ -32,9 +31,9 @@ const AnswerBox = (props : Props) => {
     }
     let btn = document.getElementById(button)?.classList
     btn?.remove("hover:text-black", "hover:bg-white", "cursor-pointer");
+    props.goToNext()
     if(props.answer == "this"){
       btn?.add("bg-green-500")
-      props.goToNext()
     }else{
       btn?.add("bg-red-500")
     }
