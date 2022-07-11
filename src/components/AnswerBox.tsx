@@ -43,7 +43,7 @@ const AnswerBox = (props : Props) => {
 
   }
   return ( 
-    <div id={button} onClick={checkAnswer} className={`border text-center rounded p-12 hover:bg-white cursor-pointer hover:text-black`}>{props.country.name[0] || ""}</div>
+    <div id={button} onClick={checkAnswer} className={`border text-center rounded p-6 md:p-12 hover:bg-white cursor-pointer hover:text-black`}>{props.country.name[0] || ""}</div>
   )
 }
 
