@@ -1,7 +1,8 @@
 import React, { useEffect, useId, useRef } from 'react'
 interface Props{
     isAnswered: boolean;
-    goToNext: any;
+    changeScore: (val: number) => void;
+    goToNext: () => void;
     country: {
         name: string[];
         threeLetterCode: string;
@@ -33,8 +34,10 @@ const AnswerBox = (props : Props) => {
     btn?.remove("hover:text-black", "hover:bg-white", "cursor-pointer");
     props.goToNext()
     if(props.answer == "this"){
+      props.changeScore(1)
       btn?.add("bg-green-500")
     }else{
+      props.changeScore(0)
       btn?.add("bg-red-500")
     }
 

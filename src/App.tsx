@@ -35,6 +35,10 @@ function App() {
     twoLetterCode: string;
   }[]>([getRandomCountry()])
   const [isAnswered, setIsAnswered] = useState(false)
+  const [answeredCorrectly, setAnswerdCorrectly] = useState<number>(parseInt(sessionStorage.getItem("answeredCorrectly")!) || 0)
+  const [answered, setAnswerd] = useState<number>(parseInt(sessionStorage.getItem("answered")!) || 0)
+
+
   useEffect(() => {
     let countryList = [...countries];
     for(let _ = 0; _ < 3; _++){
@@ -52,10 +56,23 @@ function App() {
     
     setNumbers(shuffle(numbers))
   }, [])
+
+  const changeScoreValues = (val : number) => {
+    setAnswerdCorrectly(answeredCorrectly + val)
+    setAnswerd(answered + 1)
+    sessionStorage.setItem("answeredCorrectly", (answeredCorrectly+val).toString())
+    sessionStorage.setItem("answered", (answered+1).toString())
+  }
   
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className='p-4'></div>
+      <div className='p-2'></div>
+      <div className='flex w-[400px] place-content-between border rounded p-2'>
+        <div>Score</div>
+        <div>{`${answeredCorrectly}/${answered}`}</div>
+        <div>{Math.floor(answeredCorrectly/answered * 100) || 0}%</div>
+      </div>
+      <div className='p-2'></div>
       <div>  
         <header className="text-3xl">
           What country is it?
@@ -68,7 +85,7 @@ function App() {
       <div className='p-4'></div>
       <div className='grid grid-cols-2 gap-6'>
       {countries.length == 4 ?  numbers.map((num) => (
-        <AnswerBox isAnswered={isAnswered} goToNext={() => setIsAnswered(!isAnswered)} key={countries[num].twoLetterCode} country={countries[num]} answer={num == 0 ? "this" : ''} />
+        <AnswerBox changeScore={changeScoreValues} isAnswered={isAnswered} goToNext={() => setIsAnswered(!isAnswered)} key={countries[num].twoLetterCode} country={countries[num]} answer={num == 0 ? "this" : ''} />
       )): ""}
       
       </div>
