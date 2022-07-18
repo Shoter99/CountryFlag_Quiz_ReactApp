@@ -23,20 +23,18 @@ function App() {
 
     return array;
   }
-
+  interface Country {
+    name: string[];
+    threeLetterCode: string;
+    twoLetterCode: string;
+  }
   const getRandomCountry = () => {
     let randomCountry =
       country_data[Math.floor(Math.random() * country_data.length)];
     return randomCountry;
   };
   const [numbers, setNumbers] = useState([0, 1, 2, 3]);
-  const [countries, setCountries] = useState<
-    {
-      name: string[];
-      threeLetterCode: string;
-      twoLetterCode: string;
-    }[]
-  >([getRandomCountry()]);
+  const [countries, setCountries] = useState<Country[]>([getRandomCountry()]);
   const [isAnswered, setIsAnswered] = useState(false);
   const [answeredCorrectly, setAnswerdCorrectly] = useState<number>(
     parseInt(sessionStorage.getItem("answeredCorrectly")!) || 0
@@ -44,7 +42,6 @@ function App() {
   const [answered, setAnswerd] = useState<number>(
     parseInt(sessionStorage.getItem("answered")!) || 0
   );
-
   useEffect(() => {
     let countryList = [...countries];
     for (let _ = 0; _ < 3; _++) {
